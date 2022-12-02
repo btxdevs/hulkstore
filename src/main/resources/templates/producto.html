@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/font/fontawesome/css/fontawesome.css">
+        <link rel="stylesheet" href="/font/fontawesome/css/solid.css">
+        <script src="/js/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container px-4 px-lg-5">
+                    <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                                    <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="d-flex">
+                            <button class="btn btn-outline-dark" type="submit">
+                                <i class="fa-solid fa-cart-shopping me-1"></i>
+                                Cart
+                                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="row bg-dark">
+
+                <div class="col-md-3 mt-5 mb-5">
+                    <div class="ms-5 me-5 bg-white h-100 p-1">
+                        <div class="ms-2 me-2 d-grid gap-2">
+                            <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#modalProducto">Nuevo Producto</button>
+                            <button id="btnEditarProducto" class="btn btn-outline-dark" type="button">Editar Producto</button>
+                            <button id="btnEliminarProducto" class="btn btn-outline-dark" type="button">Eliminar Producto</button>
+                            <br>
+                            <button id="btnEntradaProducto" class="btn btn-outline-dark" type="button">Registrar Entrada</button>
+                            <button id="btnSalidaProducto" class="btn btn-outline-dark" type="button">Registrar Salida</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-9 mt-5 mb-5">
+
+                    <div class="ms-5 me-5 bg-white p-1">
+                        <div class="table-responsive" style="height: 470px">
+                            <table id="productoTable" class="table" page="0">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">SKU</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <nav class="table-pagination" aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link prev" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link next" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalProducto" class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Producto</h5>
+                            <button type="button" class="btn-close button-cancel" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="col-md-12">
+                                    <label for="productoNombre">Nombre</label>
+                                    <input id="productoNombre" type="text" class="form-control" name="nombre" required>
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <label for="productoSku">SKU</label>
+                                    <input id="productoSku" type="text" class="form-control" name="sku" required>
+                                </div>
+                                <br>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark button-cancel" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-outline-dark button-ok">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalEditarProducto" class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Producto</h5>
+                            <button type="button" class="btn-close button-cancel" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="col-md-12">
+                                    <label for="productoEditarId">Id</label>
+                                    <input id="productoEditarId" type="text" class="form-control" name="id" readonly required>
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <label for="productoEditarNombre">Nombre</label>
+                                    <input id="productoEditarNombre" type="text" class="form-control" name="nombre" required>
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <label for="productoEditarSku">SKU</label>
+                                    <input id="productoEditarSku" type="text" class="form-control" name="sku" required>
+                                </div>
+                                <br>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark button-cancel" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-outline-dark button-ok">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row py-5 bg-dark">
+                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="/js/table-pagination.js"></script>
+        <script src="/js/producto.js"></script>
+    </body>
+</html>
