@@ -27,7 +27,7 @@ public class InitService {
         Usuario usuario = Usuario.builder()
                 .nombre("admin")
                 .telefono("9999999999")
-                .email("admin@kardex.com")
+                .email("admin@hulkstore.com")
                 .rol(Usuario.Role.ADMIN)
                 .passwordHash(passwordEncoder.encode("admin"))
                 .build();
