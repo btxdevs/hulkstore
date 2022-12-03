@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.btxdev</groupId>
-	<artifactId>kardex</artifactId>
+	<artifactId>hulkstore</artifactId>
 	<version>0.1</version>
 	<name>kardex</name>
 	<description>Demo project for Spring Boot</description>

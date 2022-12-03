@@ -1,2 +1,2 @@
-com\btxdev\kardex\service\ProductoServiceTest.class
-com\btxdev\kardex\AppTests.class
+com\btxdev\hulkstore\AppTests.class
+com\btxdev\hulkstore\service\ProductoServiceTest.class
