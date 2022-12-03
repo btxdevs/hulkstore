@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Cart</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/font/fontawesome/css/fontawesome.css">
+        <link rel="stylesheet" href="/font/fontawesome/css/solid.css">
+        <script src="/js/jquery.min.js"></script>
+    </head>
+    <body class="bg-dark">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">HULK STORE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" th:if="${session?.username}">
+                        <a class="nav-link" href="/producto">Productos</a>
+                    </li>
+                    <li class="nav-item" th:if="${session?.username}">
+                        <a class="nav-link" href="/usuario">Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shop">Shop</a>
+                    </li>
+                    <li class="nav-item" th:if="${session?.username == null}">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item" th:if="${session?.username}">
+                        <a class="nav-link" href="/login?logout=true">Logout</a>
+                    </li>
+                </ul>
+                <span class="navbar-text me-3" th:text="${session?.username}">
+
+                        </span>
+                <div class="d-flex invisible">
+                    <a class="btn btn-outline-dark" href="/cart">
+                        <i class="fa-solid fa-cart-shopping me-1"></i>
+                        Carro
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="h-100">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body p-4">
+
+                            <div class="row">
+
+                                <div class="col-lg-7">
+                                    <h5 class="mb-3"><a href="/shop" class="text-body"><i
+                                            class="fas fa-long-arrow-alt-left me-2"></i>Continuar comprando</a></h5>
+                                    <hr>
+
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div>
+                                            <p class="mb-1">Carro de compras</p>
+                                            <p class="mb-0">Tienes <span id="cart-total">0</span> productos en el carro</p>
+                                        </div>
+                                    </div>
+
+                                    <div id="productos-container">
+                                        <div class="card mb-3 producto-card-base" style="display: none">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div class="ms-3">
+                                                            <h5 class="producto-nombre">...</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div style="width: 50px;">
+                                                            <h5 class="fw-normal mb-0 producto-cantidad">...</h5>
+                                                        </div>
+                                                        <div class="me-3" style="width: 80px;">
+                                                            <h5 class="mb-0 producto-precio">...</h5>
+                                                        </div>
+                                                        <a class="producto-cart-remove" style="color: #cecece;">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-5">
+
+                                    <div class="card bg-secondary text-white rounded-3">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                                <h5 class="mb-0">Detalles de pago</h5>
+                                            </div>
+                                            <div class="invisible">
+                                                <p class="small mb-2">Tipo de tarjeta</p>
+                                                <a href="#!" type="submit" class="text-white"><i
+                                                        class="fab fa-cc-mastercard fa-2x me-2"></i></a>
+                                                <a href="#!" type="submit" class="text-white"><i
+                                                        class="fab fa-cc-visa fa-2x me-2"></i></a>
+                                                <a href="#!" type="submit" class="text-white"><i
+                                                        class="fab fa-cc-amex fa-2x me-2"></i></a>
+                                                <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-paypal fa-2x"></i></a>
+                                            </div>
+                                            <form id="checkout-form">
+                                                <div class="mt-4">
+                                                    <div class="form-outline form-white mb-4">
+                                                        <input type="text" class="form-control form-control-lg" size="17" required/>
+                                                        <label class="form-label">Nombre en la tarjeta</label>
+                                                    </div>
+
+                                                    <div class="form-outline form-white mb-4">
+                                                        <input type="text" class="form-control form-control-lg" size="17"
+                                                               placeholder="0000 0000 0000 0000" minlength="19" maxlength="19" required/>
+                                                        <label class="form-label">Numero de la tarjeta</label>
+                                                    </div>
+
+                                                    <div class="row mb-4">
+                                                        <div class="col-md-6">
+                                                            <div class="form-outline form-white">
+                                                                <input type="text" class="form-control form-control-lg"
+                                                                       placeholder="MM/YYYY" size="7" id="exp" minlength="7" maxlength="7" required/>
+                                                                <label class="form-label">Expiracion</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-outline form-white">
+                                                                <input type="password" class="form-control form-control-lg"
+                                                                       placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" required/>
+                                                                <label class="form-label">CCV</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <hr class="my-4">
+
+                                                <div class="d-flex justify-content-between mb-4">
+                                                    <p class="mb-2">Total</p>
+                                                    <p id="productos-valor-total" class="mb-2">...</p>
+                                                </div>
+
+                                                <button id="button-checkout" type="submit" class="btn btn-outline-light btn-block btn-lg">
+                                                    <div class="d-flex justify-content-between">
+                                                        <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                                    </div>
+                                                </button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+        <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="/js/cart.js"></script>
+    </body>
+</html>

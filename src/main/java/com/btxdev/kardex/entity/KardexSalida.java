@@ -24,10 +24,10 @@ public class KardexSalida {
     private Integer cantidad;
 
     @Column(name = "valor_unitario", nullable = false)
-    private Double valorUnitario;
+    private Long valorUnitario;
 
     @Column(name = "valor_total", nullable = false)
-    private Double valorTotal;
+    private Long valorTotal;
 
     @Override
     public boolean equals(Object o) {

@@ -20,19 +20,7 @@ public class ErrorResponse {
     private String error;
     private String path;
     private String exception;
-
-    private Integer code;
     private String message;
-
-    public ErrorResponse(@NonNull HttpStatus httpStatus, @NonNull HttpServletRequest httpServletRequest, @NonNull Throwable e, @NonNull Integer code, String message) {
-        this.timestamp = LocalDateTime.now().toString();
-        this.status = httpStatus.value();
-        this.error = httpStatus.getReasonPhrase();
-        this.path = httpServletRequest.getServletPath();
-        this.exception = e.getClass().getSimpleName();
-        this.code = code;
-        this.message = message;
-    }
 
     public ErrorResponse(@NonNull HttpStatus httpStatus, @NonNull HttpServletRequest httpServletRequest, @NonNull Throwable e, String message) {
         this.timestamp = LocalDateTime.now().toString();

@@ -21,7 +21,7 @@ public class Kardex {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.MERGE, optional = false)
     @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
 
@@ -39,7 +39,7 @@ public class Kardex {
     @JoinColumn(name = "kardex_salida_id")
     private KardexSalida salida;
 
-    @OneToOne(optional = false, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
     @JoinColumn(name = "kardex_saldo_id", nullable = false)
     private KardexSaldo saldo;
 

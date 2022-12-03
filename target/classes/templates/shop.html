@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/font/fontawesome/css/fontawesome.css">
+        <link rel="stylesheet" href="/font/fontawesome/css/solid.css">
+        <script src="/js/jquery.min.js"></script>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">HULK STORE</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item" th:if="${session?.username}">
+                            <a class="nav-link" href="/producto">Productos</a>
+                        </li>
+                        <li class="nav-item" th:if="${session?.username}">
+                            <a class="nav-link" href="/usuario">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/shop">Shop</a>
+                        </li>
+                        <li class="nav-item" th:if="${session?.username == null}">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item" th:if="${session?.username}">
+                            <a class="nav-link" href="/login?logout=true">Logout</a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text me-3" th:text="${session?.username}">
+
+                        </span>
+                    <div class="d-flex">
+                        <a class="btn btn-outline-dark" href="/cart">
+                            <i class="fa-solid fa-cart-shopping me-1"></i>
+                            Carro
+                            <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart-total">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Shop in style</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">HULK STORE</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div id="productos-container" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                    <div class="col mb-5 producto-card producto-card-base">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top producto-imagen" src="/assets/producto_box.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder producto-nombre">...</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="producto-precio">...</span>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><button class="producto-cart btn btn-outline-dark mt-auto" disabled>Agregar al carro</button></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; HULK STORE 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="/js/shop.js"></script>
+    </body>
+</html>

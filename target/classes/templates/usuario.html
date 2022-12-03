@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Usuario</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/font/fontawesome/css/fontawesome.css">
+        <link rel="stylesheet" href="/font/fontawesome/css/solid.css">
+        <script src="/js/jquery.min.js"></script>
+    </head>
+    <body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">HULK STORE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" th:if="${session?.username}">
+                        <a class="nav-link" href="/producto">Productos</a>
+                    </li>
+                    <li class="nav-item" th:if="${session?.username}">
+                        <a class="nav-link active" href="/usuario">Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/shop">Shop</a>
+                    </li>
+                    <li class="nav-item" th:if="${session?.username == null}">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item" th:if="${session?.username}">
+                        <a class="nav-link" href="/login?logout=true">Logout</a>
+                    </li>
+                </ul>
+                <span class="navbar-text me-3" th:text="${session?.username}">
+
+                        </span>
+                <div class="d-flex invisible">
+                    <a class="btn btn-outline-dark" href="/cart">
+                        <i class="fa-solid fa-cart-shopping me-1"></i>
+                        Carro
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-md-2 offset-md-1 mt-5 mb-5">
+                    <div class="ms-2 me-2 bg-white h-100 p-1 pt-4 pb-4 rounded-3">
+                        <div class="ms-2 me-2 d-grid gap-2">
+                            <button id="btnNuevoUsuario" class="btn btn-outline-dark" type="button">Nuevo Usuario</button>
+                            <button id="btnEditarUsuario" class="btn btn-outline-dark" type="button">Editar Usuario</button>
+                            <button id="btnEliminarUsuario" class="btn btn-outline-dark" type="button">Eliminar Usuario</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 mt-5 mb-5">
+
+                    <div class="ms-2 me-2 bg-white p-1 rounded-3">
+                        <div class="table-responsive" style="height: 470px">
+                            <table id="usuarioTable" class="table" page="0">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Rol</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Telefono</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <nav class="table-pagination" aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link prev" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link next" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalUsuario" class="modal" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Usuario</h5>
+                            <button type="button" class="btn-close button-cancel" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form>
+                            <div class="modal-body">
+                                    <div class="col-md-12">
+                                        <label for="usuarioNombre">Nombre</label>
+                                        <input id="usuarioNombre" type="text" class="form-control" name="nombre" required>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="usuarioRol">Rol</label>
+                                        <select id="usuarioRol" class="form-select" name="rol" required>
+                                            <option value="ADMIN">Administrador</option>
+                                            <option value="USER" selected>Usuario</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="usuarioEmail">Email</label>
+                                        <input id="usuarioEmail" type="email" class="form-control" name="email" required>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="usuarioTelefono">Telefono</label>
+                                        <input id="usuarioTelefono" type="number" class="form-control" name="telefono" required>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="usuarioPassword">Contraseña</label>
+                                        <input id="usuarioPassword" type="password" class="form-control" name="password" required>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="usuarioPasswordConfirmar">Confirmar contraseña</label>
+                                        <input id="usuarioPasswordConfirmar" type="password" class="form-control" required>
+                                    </div>
+                                    <br>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-dark button-cancel" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-outline-dark button-ok">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalEditarUsuario" class="modal" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Usuario</h5>
+                            <button type="button" class="btn-close button-cancel" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form>
+                            <div class="modal-body">
+
+                                    <div class="col-md-12">
+                                        <label for="usuarioEditarNombre">Nombre</label>
+                                        <input id="usuarioEditarNombre" type="text" class="form-control" name="nombre" required readonly>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="usuarioEditarRol">Rol</label>
+                                        <select id="usuarioEditarRol" class="form-select" name="rol" >
+                                            <option value="ADMIN">Administrador</option>
+                                            <option value="USER" selected>Usuario</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="usuarioEditarEmail">Email</label>
+                                        <input id="usuarioEditarEmail" type="email" class="form-control" name="email" >
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="usuarioEditarTelefono">Telefono</label>
+                                        <input id="usuarioEditarTelefono" type="number" class="form-control" name="telefono" >
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="usuarioEditarPassword">Contraseña</label>
+                                        <input id="usuarioEditarPassword" type="password" class="form-control" name="password">
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="usuarioEditarPasswordConfirmar">Confirmar contraseña</label>
+                                        <input id="usuarioEditarPasswordConfirmar" type="password" class="form-control">
+                                    </div>
+                                    <br>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-dark button-cancel" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-outline-dark button-ok">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="/js/usuario.js"></script>
+    </body>
+</html>

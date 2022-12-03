@@ -26,6 +26,12 @@ public class Producto {
     @Column(name = "sku", nullable = false, unique = true, length = 50)
     private String sku;
 
+    @Column(name = "cantidad_disponible", nullable = false)
+    private Integer cantidadDisponible;
+
+    @Column(name = "valor_unitario", nullable = false)
+    private Long valorUnitario;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

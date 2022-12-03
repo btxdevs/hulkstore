@@ -13,10 +13,7 @@ public interface KardexRepository extends JpaRepository<Kardex, Long>, JpaSpecif
 
     List<Kardex> findByProductoOrderByFechaHoraAsc(Producto producto);
 
-    Optional<Kardex> findFirstByOrderByFechaHoraDesc();
+    Optional<Kardex> findFirstByProductoOrderByFechaHoraDesc(Producto producto);
 
-
-
-
-
+    long deleteByProducto_Id(Long id);
 }

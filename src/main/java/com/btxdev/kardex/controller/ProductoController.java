@@ -1,6 +1,6 @@
 package com.btxdev.kardex.controller;
 
-import com.btxdev.kardex.dto.PageDto;
+import com.btxdev.kardex.dto.pagination.PageDto;
 import com.btxdev.kardex.dto.producto.CreateProductoDto;
 import com.btxdev.kardex.dto.producto.DeleteProductoDto;
 import com.btxdev.kardex.dto.producto.ProductoDto;

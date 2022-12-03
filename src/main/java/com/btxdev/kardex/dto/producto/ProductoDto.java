@@ -19,4 +19,6 @@ public class ProductoDto {
     private Long id;
     private String nombre;
     private String sku;
+    private Integer cantidadDisponible;
+    private Long valorUnitario;
 }
